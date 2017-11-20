@@ -18,6 +18,9 @@ class Pessoa extends CI_Controller {
 
     public function cadastrar(){
 
+      //form_validation
+
+      $this->load->view('v_frmPessoa', $dados);
     }
 
     public function ver($idPessoa = NULL){
@@ -26,6 +29,14 @@ class Pessoa extends CI_Controller {
       }
 
       $rs = $this->Pessoa_model->getPessoa($idPessoa);
+
+      if($rs){
+        $dados['pessoa'] = $rs;
+      }else{
+        redirect(base_url('pessoa/listar'));
+      }
+
+      $this->load->view('v_pessoa', $dados);
     }
 
 
